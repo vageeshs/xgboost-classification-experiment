@@ -28,7 +28,7 @@ test_data = xgb.DMatrix(X_test, label=y_test)
 ```
 DMatrix is XGBoost's internal representation of dataset 
 
-### xgboost config first iteration
+### xgboost config first iteration ###
 ```
 config = {
     'max_depth': 3,  # the maximum depth of each tree
@@ -68,7 +68,7 @@ Here are the predictions for this configuration
 #### Generated booster trees ####
 *f0, f1, f2 and f3 are the 4 features in the dataset*
 
-Tree's generated in the first epoch
+*Tree's generated in the first epoch*
 ```
 booster[0]:
 0:[f2<2.45000005] yes=1,no=2,missing=1
@@ -105,7 +105,7 @@ booster[2]:
 1. 3rd tree booster[2] uses all 4 features 
 1. Finally softmax optimizer is applied to the leaf value deduced using these trees
 
-*By last iteration these 3 tree weights changed as follows* 
+*By last iteration these 3 tree weights has changed as follows* 
 
 ```
 booster[87]:
@@ -130,4 +130,74 @@ booster[89]:
 			5:leaf=0.0147221982
 			6:leaf=0.0579996109
 		4:leaf=-0.0284879301
+```
+
+### xgboost config 2nd iteration ###
+```
+config = {
+    'max_depth': 2,  # the maximum depth of each tree
+    .....
+}
+boost_rounds = 30  # the number of rounds for boosting
+```
+In this 2nd configuration iteration we only change the max tree depth to 2
+Here are the predictions for this configuration
+```
+[[0.94681555 0.02785276 0.02533168]
+ [0.05672611 0.2471049  0.696169  ]
+ [0.02875477 0.03339498 0.93785024]
+ [0.03646614 0.92628187 0.03725201]
+ [0.08247369 0.42990598 0.48762035]
+....
+```
+ **Precision score of test data :  0.9666666666666667**
+1. Notice that precision score has dropped from 1.0 to 0.9666666666666667
+
+*Tree's generated in the first epoch*
+```
+booster[0]:
+0:[f2<2.45000005] yes=1,no=2,missing=1
+	1:leaf=0.142196536
+	2:leaf=-0.0729230866
+booster[1]:
+0:[f1<2.95000005] yes=1,no=2,missing=1
+	1:[f3<1.60000002] yes=3,no=4,missing=3
+		3:leaf=0.114893615
+		4:leaf=-0.0646153912
+	2:[f2<3.04999995] yes=5,no=6,missing=5
+		5:leaf=-0.0709090978
+		6:leaf=-0.00827586651
+booster[2]:
+0:[f3<1.6500001] yes=1,no=2,missing=1
+	1:[f2<4.85000038] yes=3,no=4,missing=3
+		3:leaf=-0.0728434548
+		4:leaf=0.0239999983
+	2:leaf=0.131360948
+```
+1. As you can see trees have atmost 2 levels
+1. 1st tree booster[0] uses only f2 feature (petal length)
+1. 2nd tree booster[1] uses f1(Sepal width), f2(petal length) and f3(petal width)
+1. 3rd tree booster[2] uses only f2 and f3 feature 
+1. Sepal length feature is not used
+
+*By last iteration these 3 tree weights has changed as follows*
+```
+booster[87]:
+0:[f2<2.45000005] yes=1,no=2,missing=1
+	1:leaf=0.0433618538
+	2:leaf=-0.0440045707
+booster[88]:
+0:[f2<5.05000019] yes=1,no=2,missing=1
+	1:[f2<2.45000005] yes=3,no=4,missing=3
+		3:leaf=-0.0364460312
+		4:leaf=0.0234700609
+	2:leaf=-0.0402130224
+booster[89]:
+0:[f3<1.6500001] yes=1,no=2,missing=1
+	1:[f2<4.85000038] yes=3,no=4,missing=3
+		3:leaf=-0.0436591133
+		4:leaf=0.0148964003
+	2:[f1<2.95000005] yes=5,no=6,missing=5
+		5:leaf=0.0519691408
+		6:leaf=0.0177164394
 ```
