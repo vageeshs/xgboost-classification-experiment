@@ -2,6 +2,9 @@
 
 Focus is on experimenting with XGBoost configuration and understanding of change in generated random forest tree models
 
+Sklearn's dataset package comes with several realworld test datasets like Iris plants, handwritten digits and wine recognition for classification and Boston housing price and diabetes for regression
+Iris plants dataset that we will use in this test has 3 types Setosa, Versicolour and Virginica with 4 features sepal length and width, and petal length and width
+
 ##### Iris dataset #####
 Sepal length | Sepal width | Petal length | Petal width	| Species
 ------------ | ----------- | ------------ | ----------- | --------
@@ -13,11 +16,7 @@ Sepal length | Sepal width | Petal length | Petal width	| Species
 ```
 from sklearn import datasets
 dataset = datasets.load_iris()
-```
-Sklearn's dataset package comes with several realworld test datasets like Iris plants, handwritten digits and wine recognition for classification and Boston housing price and diabetes for regression
-Iris plants dataset that we will use in this test has 3 types Setosa, Versicolour and Virginica with 4 features sepal length and width, and petal length and width
 
-```
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 ```
 We do a 80:20 split of training and test data
