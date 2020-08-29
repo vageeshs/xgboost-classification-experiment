@@ -28,7 +28,7 @@ test_data = xgb.DMatrix(X_test, label=y_test)
 ```
 DMatrix is XGBoost's internal representation of dataset 
 
-### xgboost config first iteration ###
+### xgboost config 1st iteration ###
 ```
 config = {
     'max_depth': 3,  # the maximum depth of each tree
@@ -42,7 +42,7 @@ boost_rounds = 30  # the number of rounds for boosting
 # training and testing - numpy matrices
 booster = xgb.train(config, train_data, boost_rounds)
 ```
-In our first configuration iteration booster is configured with 
+In the 1st attempt booster is configured with 
 1) Random forest tree of max depth 3 
 2) Learning rate of 0.1
 3) Objective being multiclass classification of possible 3 types (Setosa,Versicolour and Virginica)
@@ -132,7 +132,7 @@ booster[89]:
 		4:leaf=-0.0284879301
 ```
 
-### xgboost config 2nd iteration ###
+### XGBoost config 2nd iteration ###
 ```
 config = {
     'max_depth': 2,  # the maximum depth of each tree
@@ -140,7 +140,7 @@ config = {
 }
 boost_rounds = 30  # the number of rounds for boosting
 ```
-In this 2nd configuration iteration we only change the max tree depth to 2
+In this 2nd configuration attempt we only change the max tree depth to 2
 Here are the predictions for this configuration
 ```
 [[0.94681555 0.02785276 0.02533168]
