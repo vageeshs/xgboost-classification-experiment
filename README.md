@@ -2,13 +2,6 @@
 
 Focus is on experimenting with XGBoost configuration and understanding of change in generated random forest tree models
 
-```
-from sklearn import datasets
-dataset = datasets.load_iris()
-```
-Sklearn's dataset package comes with several realworld test datasets like Iris plants, handwritten digits and wine recognition for classification and Boston housing price and diabetes for regression
-Iris plants dataset that we will use in this test has 3 types Setosa, Versicolour and Virginica with 4 features sepal length and width, and petal length and width
-
 ##### Iris dataset #####
 Sepal length | Sepal width | Petal length | Petal width	| Species
 ------------ | ----------- | ------------ | ----------- | --------
@@ -16,6 +9,13 @@ Sepal length | Sepal width | Petal length | Petal width	| Species
 4.9 | 3.0 | 1.4 | 0.2 | I. setosa
 4.7 | 3.2 | 1.3 | 0.2 | I. setosa
 ....
+
+```
+from sklearn import datasets
+dataset = datasets.load_iris()
+```
+Sklearn's dataset package comes with several realworld test datasets like Iris plants, handwritten digits and wine recognition for classification and Boston housing price and diabetes for regression
+Iris plants dataset that we will use in this test has 3 types Setosa, Versicolour and Virginica with 4 features sepal length and width, and petal length and width
 
 ```
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
@@ -28,7 +28,7 @@ test_data = xgb.DMatrix(X_test, label=y_test)
 ```
 DMatrix is XGBoost's internal representation of dataset 
 
-### xgboost config 1st iteration ###
+### XGBoost 1st config attempt ###
 ```
 config = {
     'max_depth': 3,  # the maximum depth of each tree
