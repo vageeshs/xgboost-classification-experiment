@@ -11,6 +11,7 @@ Iris plants dataset that we will use in this test has 3 types Setosa, Versicolou
 
 ##### Iris dataset #####
 Sepal length | Sepal width | Petal length | Petal width	| Species
+------------ | ----------- | ------------ | ----------- | --------
 5.1	| 3.5 | 1.4 | 0.2 | I. setosa
 4.9 | 3.0 | 1.4 | 0.2 | I. setosa
 4.7 | 3.2 | 1.3 | 0.2 | I. setosa
@@ -104,7 +105,8 @@ booster[2]:
 1. 3rd tree booster[2] uses all 4 features 
 1. Finally softmax optimizer is applied to the leaf value deduced using these trees
 
-* By last iteration these 3 tree weights changed as follows
+*By last iteration these 3 tree weights changed as follows* 
+
 ```
 booster[87]:
 0:[f2<3.4000001] yes=1,no=2,missing=1
