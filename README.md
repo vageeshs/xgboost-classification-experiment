@@ -9,6 +9,13 @@ dataset = datasets.load_iris()
 Sklearn's dataset package comes with several realworld test datasets like Iris plants, handwritten digits and wine recognition for classification and Boston housing price and diabetes for regression
 Iris plants dataset that we will use in this test has 3 types Setosa, Versicolour and Virginica with 4 features sepal length and width, and petal length and width
 
+##### Iris dataset #####
+Sepal length | Sepal width | Petal length | Petal width	| Species
+5.1	| 3.5 | 1.4 | 0.2 | I. setosa
+4.9 | 3.0 | 1.4 | 0.2 | I. setosa
+4.7 | 3.2 | 1.3 | 0.2 | I. setosa
+....
+
 ```
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 ```
@@ -90,4 +97,35 @@ booster[2]:
 		6:[f2<4.85000038] yes=11,no=12,missing=11
 			11:leaf=0.0857142806
 			12:leaf=0.279069752
+```
+1. As you can see trees have atmost 3 levels
+1. 1st tree booster[0] uses only f2 feature which is petal length (See above for Iris dataset table)
+1. 2nd tree booster[1] uses f2 and f3 which is petal width
+1. 3rd tree booster[2] uses all 4 features 
+1. Finally softmax optimizer is applied to the leaf value deduced using these trees
+
+* By last iteration these 3 tree weights changed as follows
+```
+booster[87]:
+0:[f2<3.4000001] yes=1,no=2,missing=1
+	1:leaf=0.0432979167
+	2:leaf=-0.0539936312
+booster[88]:
+0:[f0<5.44999981] yes=1,no=2,missing=1
+	1:leaf=-0.0266337991
+	2:[f2<4.85000038] yes=3,no=4,missing=3
+		3:[f0<5.94999981] yes=5,no=6,missing=5
+			5:leaf=0.053024698
+			6:leaf=0.00710496539
+		4:[f3<1.54999995] yes=7,no=8,missing=7
+			7:leaf=-0.0415618606
+			8:leaf=0.00824911147
+booster[89]:
+0:[f3<1.45000005] yes=1,no=2,missing=1
+	1:leaf=-0.0434705317
+	2:[f1<3.04999995] yes=3,no=4,missing=3
+		3:[f3<1.75] yes=5,no=6,missing=5
+			5:leaf=0.0147221982
+			6:leaf=0.0579996109
+		4:leaf=-0.0284879301
 ```
